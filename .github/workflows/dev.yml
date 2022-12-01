@@ -42,9 +42,6 @@ jobs:
         
       - name: Check gradle.properties
         run: cat ~/.gradle/gradle.properties
-        
-      - name: Build
-        run: ./gradlew build
       
       - name: Assemble Dev
         run: ./gradlew assembleDev
