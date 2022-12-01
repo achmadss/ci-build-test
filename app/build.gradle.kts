@@ -5,7 +5,6 @@ plugins {
     kotlin("kapt")
 }
 
-val keyStoreFile = findProperty("KEYSTORE_FILE")
 val keyStorePassword = findProperty("KEYSTORE_PASSWORD")
 
 val aliasName = findProperty("ALIAS_NAME")
@@ -19,8 +18,12 @@ android {
         applicationId = Dependencies.ApplicationID.testLib
         minSdk = 23
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0.0(1)"
+        versionCode = Version.DefaultConfig.Code.version
+        versionName = "" +
+                "${Version.DefaultConfig.Name.major}." +
+                "${Version.DefaultConfig.Name.minor}." +
+                Version.DefaultConfig.Name.patch +
+                "(${Version.DefaultConfig.Code.version})"
         multiDexEnabled = true
 
         vectorDrawables {
@@ -35,14 +38,14 @@ android {
         create("release"){
             keyAlias = "$aliasName"
             keyPassword = "$aliasPassword"
-            storeFile = file("$keyStoreFile")
+            storeFile = file("keystore.jks")
             storePassword = "$keyStorePassword"
         }
         //https://github.com/onmyway133/blog/issues/285
         create("dev"){
             keyAlias = "$aliasName"
             keyPassword = "$aliasPassword"
-            storeFile = file("$keyStoreFile")
+            storeFile = file("keystore.jks")
             storePassword = "$keyStorePassword"
         }
     }

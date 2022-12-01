@@ -1,4 +1,14 @@
 object Version {
+    object DefaultConfig {
+        object Code {
+            const val version = 1
+        }
+        object Name {
+            const val major = "1"
+            const val minor = "0"
+            const val patch = "0"
+        }
+    }
     object Core {
         const val version = "1.9.0"
     }
