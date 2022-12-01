@@ -14,7 +14,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 7.3.3
+          gradle-version: 7.4
           
       - name: Make .gradle directory and set up gradle.properties
         run: |
