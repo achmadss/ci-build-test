@@ -4,17 +4,15 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
-          java-version: 18
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Set up Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: 7.4
           
       - name: Make .gradle directory and set up gradle.properties
         run: |
@@ -32,10 +30,12 @@ jobs:
       
       - name: Copy credentials to global gradle.properties
         env:
+          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES_FILE_CONTENT }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           ALIAS_NAME: ${{ secrets.ALIAS_NAME }}
           ALIAS_PASSWORD: ${{ secrets.ALIAS_PASSWORD }}
         run: |
+          echo $GOOGLE_SERVICES >> ./app/google-services.json
           echo KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD >> ~/.gradle/gradle.properties
           echo ALIAS_NAME=$ALIAS_NAME >> ~/.gradle/gradle.properties
           echo ALIAS_PASSWORD=$ALIAS_PASSWORD >> ~/.gradle/gradle.properties
