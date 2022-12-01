@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri("http://43.231.128.50:8080/releases")
+            setAllowInsecureProtocol(true)
+        }
+        maven {
+            url = uri("https://jitpack.io")
+        }
+    }
+}
+rootProject.name = "My Application"
+include ':app'
